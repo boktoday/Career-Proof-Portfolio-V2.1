@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth scroll-pt-24">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brendan's Career Portfolio</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -43,6 +45,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .geometric-bg::before {
             content: '';
             position: absolute;
@@ -50,11 +53,12 @@
             left: -20%;
             width: 80%;
             height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0.03), transparent);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.03), transparent);
             transform: rotate(30deg);
             pointer-events: none;
             z-index: 0;
         }
+
         .geometric-bg::after {
             content: '';
             position: absolute;
@@ -67,19 +71,33 @@
             pointer-events: none;
             z-index: 0;
         }
-        
+
         @keyframes fillBar {
-            from { width: 0; }
-            to { width: var(--target-width); }
+            from {
+                width: 0;
+            }
+
+            to {
+                width: var(--target-width);
+            }
         }
+
         .progress-fill {
             animation: fillBar 1.5s ease-out forwards;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .animate-fade-in {
             animation: fadeIn 0.3s ease-out forwards;
         }
@@ -87,6 +105,7 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -95,21 +114,24 @@
         #project-modal {
             transition: opacity 0.3s ease-in-out, visibility 0.3s;
         }
+
         #project-modal.hidden {
             opacity: 0;
             visibility: hidden;
             display: flex !important;
             pointer-events: none;
         }
+
         #modal-container {
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             transform: scale(0.95) translateY(20px);
         }
+
         #project-modal:not(.hidden) #modal-container {
             transform: scale(1) translateY(0);
         }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "@google/genai": "https://esm.sh/@google/genai@^1.37.0"
@@ -117,20 +139,29 @@
 }
 </script>
 </head>
+
 <body class="bg-primary text-white font-sans antialiased selection:bg-accent selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-primary/90 backdrop-blur-md border-b border-white/5" id="navbar">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-primary/90 backdrop-blur-md border-b border-white/5"
+        id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="#home" class="text-lg md:text-xl font-bold tracking-wider text-accent uppercase">Brendan's Career Portfolio</a>
-            
+            <a href="#home" class="text-lg md:text-xl font-bold tracking-wider text-accent uppercase">Brendan's Career
+                Portfolio</a>
+
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Home</a>
-                <a href="#about" class="text-sm font-medium hover:text-accent transition-colors text-gray-300">About & Skills</a>
-                <a href="#experience" class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Experience</a>
-                <a href="#portfolio" class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Portfolio</a>
-                <a href="#certifications" class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Certifications</a>
-                <a href="mailto:boktoday@gmail.com" class="px-6 py-2 border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 text-sm font-semibold rounded-sm">Let's Talk</a>
+                <a href="#about" class="text-sm font-medium hover:text-accent transition-colors text-gray-300">About &
+                    Skills</a>
+                <a href="#experience"
+                    class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Experience</a>
+                <a href="#portfolio"
+                    class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Portfolio</a>
+                <a href="#certifications"
+                    class="text-sm font-medium hover:text-accent transition-colors text-gray-300">Certifications</a>
+                <a href="mailto:boktoday@gmail.com"
+                    class="px-6 py-2 border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 text-sm font-semibold rounded-sm">Let's
+                    Talk</a>
             </div>
 
             <button class="md:hidden text-white focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
@@ -140,11 +171,17 @@
 
         <div class="md:hidden hidden bg-secondary absolute w-full border-t border-white/10 shadow-2xl" id="mobile-menu">
             <div class="flex flex-col px-6 py-4 space-y-4">
-                <a href="#home" class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Home</a>
-                <a href="#about" class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">About & Skills</a>
-                <a href="#experience" class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Experience</a>
-                <a href="#portfolio" class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Portfolio</a>
-                <a href="#certifications" class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Certifications</a>
+                <a href="#home"
+                    class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Home</a>
+                <a href="#about"
+                    class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">About &
+                    Skills</a>
+                <a href="#experience"
+                    class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Experience</a>
+                <a href="#portfolio"
+                    class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Portfolio</a>
+                <a href="#certifications"
+                    class="text-gray-300 hover:text-accent block py-2 border-b border-white/5 nav-link">Certifications</a>
                 <a href="mailto:boktoday@gmail.com" class="text-accent font-semibold block pt-2">Contact Me</a>
             </div>
         </div>
@@ -163,23 +200,26 @@
                     Support Worker <span class="text-gray-500">&</span><br> Community Engagement
                 </p>
                 <p class="text-muted max-w-md leading-relaxed">
-                    Dedicated professional with extensive experience in diverse care settings, including mental health, youth support, and independent living.
+                    Dedicated professional with extensive experience in diverse care settings, including mental health,
+                    youth support, and independent living.
                 </p>
                 <div class="pt-6">
-                    <a href="#experience" class="inline-block px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 font-semibold rounded-sm tracking-wide">
+                    <a href="#experience"
+                        class="inline-block px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 font-semibold rounded-sm tracking-wide">
                         View Experience
                     </a>
                 </div>
             </div>
-            
+
             <div class="relative flex justify-center md:justify-end">
                 <div class="relative w-72 h-72 md:w-96 md:h-96">
                     <div class="absolute inset-0 border-2 border-accent/20 transform rotate-6 rounded-full"></div>
-                    <div class="absolute inset-0 bg-secondary rounded-full overflow-hidden shadow-2xl border border-white/5 flex items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-secondary rounded-full overflow-hidden shadow-2xl border border-white/5 flex items-center justify-center">
                         <i class="fas fa-user text-8xl text-accent/20 absolute"></i>
-                        <img src="https://iam.aichampion.com.au/assets/brendan-okeefe-profile-cap-2026-compressed-BxhSLMkt.png" 
-                             alt="Brendan O'Keefe" 
-                             class="w-full h-full object-cover transition-transform duration-500 relative z-10">
+                        <img src="https://iam.aichampion.com.au/assets/brendan-okeefe-profile-cap-2026-compressed-BxhSLMkt.png"
+                            alt="Brendan O'Keefe"
+                            class="w-full h-full object-cover transition-transform duration-500 relative z-10">
                     </div>
                 </div>
             </div>
@@ -193,31 +233,50 @@
                 <div>
                     <h3 class="text-3xl font-bold mb-8">About Me</h3>
                     <p class="text-muted leading-relaxed mb-6">
-                        I am a dedicated Support Worker with a unique background blending direct client care, digital engagement, and youth work. My career is defined by a commitment to fostering independence and dignity for clients with diverse needs, from MND and FTD to mental health challenges.
+                        I am a dedicated Support Worker with a unique background blending direct client care, digital
+                        engagement, and youth work. My career is defined by a commitment to fostering independence and
+                        dignity for clients with diverse needs, from MND and FTD to mental health challenges.
                     </p>
                     <div class="grid grid-cols-2 gap-6 mt-8">
-                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Phone</span><span class="text-white">0490 393 533</span></div>
-                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Email</span><a href="mailto:boktoday@gmail.com" class="text-white hover:text-accent transition-colors">boktoday@gmail.com</a></div>
-                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Location</span><span class="text-white">Cranbourne West, 3977</span></div>
-                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Languages</span><span class="text-white">English</span></div>
+                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Phone</span><span
+                                class="text-white">0490 393 533</span></div>
+                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Email</span><a
+                                href="mailto:boktoday@gmail.com"
+                                class="text-white hover:text-accent transition-colors">boktoday@gmail.com</a></div>
+                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Location</span><span
+                                class="text-white">Cranbourne West, 3977</span></div>
+                        <div><span class="block text-accent text-sm uppercase tracking-wider mb-1">Languages</span><span
+                                class="text-white">English</span></div>
                     </div>
                 </div>
                 <div class="flex flex-col justify-center space-y-8">
                     <div>
-                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Patient Care (MND/FTD/NDIS)</span><span class="text-accent">95%</span></div>
-                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden"><div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 95%"></div></div>
+                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Patient Care
+                                (MND/FTD/NDIS)</span><span class="text-accent">95%</span></div>
+                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 95%"></div>
+                        </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Crisis De-escalation</span><span class="text-accent">90%</span></div>
-                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden"><div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 90%"></div></div>
+                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Crisis
+                                De-escalation</span><span class="text-accent">90%</span></div>
+                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 90%"></div>
+                        </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Relationship Building</span><span class="text-accent">98%</span></div>
-                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden"><div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 98%"></div></div>
+                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Relationship
+                                Building</span><span class="text-accent">98%</span></div>
+                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 98%"></div>
+                        </div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Digital Literacy</span><span class="text-accent">85%</span></div>
-                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden"><div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 85%"></div></div>
+                        <div class="flex justify-between mb-2"><span class="text-white font-medium">Digital
+                                Literacy</span><span class="text-accent">85%</span></div>
+                        <div class="w-full bg-primary h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-accent h-1.5 rounded-full progress-fill" style="--target-width: 85%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,27 +291,41 @@
                 <h2 class="text-4xl font-bold text-white">Work Experience</h2>
             </div>
             <div class="grid gap-8">
-                <div class="group bg-secondary p-8 border border-white/5 hover:border-accent/30 transition-all duration-300 rounded-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div
+                    class="group bg-secondary p-8 border border-white/5 hover:border-accent/30 transition-all duration-300 rounded-sm relative overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
                     <div class="flex flex-col md:flex-row md:items-start justify-between mb-4">
                         <div>
-                            <h4 class="text-2xl font-semibold text-white group-hover:text-accent transition-colors">Support Worker</h4>
+                            <h4 class="text-2xl font-semibold text-white group-hover:text-accent transition-colors">
+                                Support Worker</h4>
                             <p class="text-lg text-gray-300">Blue Heart Community Care, Cranbourne</p>
                         </div>
-                        <div class="mt-2 md:mt-0 px-4 py-1 bg-primary border border-white/10 rounded-full text-xs font-medium text-accent">Dec 2024 - October 2025</div>
+                        <div
+                            class="mt-2 md:mt-0 px-4 py-1 bg-primary border border-white/10 rounded-full text-xs font-medium text-accent">
+                            Dec 2024 - October 2025</div>
                     </div>
-                    <p class="text-muted leading-relaxed mb-4">Delivered comprehensive support to a client with Motor Neurone Disease (MND) and Frontotemporal Dementia (FTD).</p>
+                    <p class="text-muted leading-relaxed mb-4">Delivered comprehensive support to a client with Motor
+                        Neurone Disease (MND) and Frontotemporal Dementia (FTD).</p>
                 </div>
-                <div class="group bg-secondary p-8 border border-white/5 hover:border-accent/30 transition-all duration-300 rounded-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div
+                    class="group bg-secondary p-8 border border-white/5 hover:border-accent/30 transition-all duration-300 rounded-sm relative overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
                     <div class="flex flex-col md:flex-row md:items-start justify-between mb-4">
                         <div>
-                            <h4 class="text-2xl font-semibold text-white group-hover:text-accent transition-colors">Support Worker</h4>
+                            <h4 class="text-2xl font-semibold text-white group-hover:text-accent transition-colors">
+                                Support Worker</h4>
                             <p class="text-lg text-gray-300">SAI/General Home Care, Carrum Downs</p>
                         </div>
-                        <div class="mt-2 md:mt-0 px-4 py-1 bg-primary border border-white/10 rounded-full text-xs font-medium text-accent">Mar 2023 - Dec 2024</div>
+                        <div
+                            class="mt-2 md:mt-0 px-4 py-1 bg-primary border border-white/10 rounded-full text-xs font-medium text-accent">
+                            Mar 2023 - Dec 2024</div>
                     </div>
-                    <p class="text-muted leading-relaxed mb-4">Provided person-centered support across Aged Care and NDIS settings.</p>
+                    <p class="text-muted leading-relaxed mb-4">Provided person-centered support across Aged Care and
+                        NDIS settings.</p>
                 </div>
             </div>
         </div>
@@ -264,7 +337,8 @@
             <div class="text-center mb-16">
                 <h3 class="text-accent uppercase tracking-widest text-sm font-semibold mb-2">Showcase</h3>
                 <h2 class="text-4xl font-bold text-white">Featured Projects</h2>
-                <p class="text-muted mt-4 max-w-2xl mx-auto">Explore my work across community engagement, specialized care systems, and digital strategy.</p>
+                <p class="text-muted max-w-2xl mx-auto">A strategic collection of artifacts demonstrating end-to-end
+                    capability in AI system architecture, automated workflows, and digital product deployment.</p>
             </div>
             <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Projects rendered by index.tsx -->
@@ -273,9 +347,13 @@
     </section>
 
     <!-- Project Detail Modal -->
-    <div id="project-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 md:p-8 bg-primary/95 backdrop-blur-xl transition-all duration-300">
-        <div id="modal-container" class="max-w-4xl w-full max-h-full overflow-y-auto no-scrollbar bg-secondary border border-white/10 rounded-lg shadow-2xl relative">
-            <button id="close-modal-btn" class="absolute top-4 right-4 md:top-6 md:right-6 text-white/50 hover:text-accent hover:scale-110 text-2xl z-[110] p-2 bg-primary/50 rounded-full transition-all flex items-center justify-center w-10 h-10 cursor-pointer" aria-label="Close Project">
+    <div id="project-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 md:p-8 bg-primary/95 backdrop-blur-xl transition-all duration-300">
+        <div id="modal-container"
+            class="max-w-4xl w-full max-h-full overflow-y-auto no-scrollbar bg-secondary border border-white/10 rounded-lg shadow-2xl relative">
+            <button id="close-modal-btn"
+                class="absolute top-4 right-4 md:top-6 md:right-6 text-white/50 hover:text-accent hover:scale-110 text-2xl z-[110] p-2 bg-primary/50 rounded-full transition-all flex items-center justify-center w-10 h-10 cursor-pointer"
+                aria-label="Close Project">
                 <i class="fas fa-times"></i>
             </button>
             <div id="modal-content" class="p-8 md:p-12">
@@ -291,16 +369,24 @@
                 <h3 class="text-accent uppercase tracking-widest text-sm font-semibold mb-2">Qualifications</h3>
                 <h2 class="text-4xl font-bold text-white">Key Certifications</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
-                    <p class="text-accent text-sm font-bold mb-2">2025</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div
+                    class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
+                    <p class="text-accent text-sm font-bold mb-2">2026</p>
+                    <h5 class="text-white font-semibold">Career Proof Portfolio - AI Orchestrator Training</h5>
+                </div>
+                <div
+                    class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
+                    <p class="text-accent text-sm font-bold mb-2">2026</p>
                     <h5 class="text-white font-semibold">HLTAID009 Provide CPR</h5>
                 </div>
-                <div class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
-                    <p class="text-accent text-sm font-bold mb-2">2023</p>
+                <div
+                    class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
+                    <p class="text-accent text-sm font-bold mb-2">2026</p>
                     <h5 class="text-white font-semibold">HLTAID011 Provide First Aid</h5>
                 </div>
-                <div class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
+                <div
+                    class="bg-secondary p-6 rounded-sm border-l-2 border-accent hover:translate-y-[-5px] transition-transform duration-300">
                     <p class="text-accent text-sm font-bold mb-2">2023</p>
                     <h5 class="text-white font-semibold">COVID19 Infection Control</h5>
                 </div>
@@ -312,7 +398,9 @@
     <footer class="py-20 bg-secondary border-t border-white/5">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold text-white mb-6">Need dedicated support?</h2>
-            <a href="mailto:boktoday@gmail.com" class="inline-block px-10 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 font-bold text-lg rounded-sm uppercase tracking-wide">Contact Me</a>
+            <a href="mailto:boktoday@gmail.com"
+                class="inline-block px-10 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 font-bold text-lg rounded-sm uppercase tracking-wide">Contact
+                Me</a>
             <div class="mt-20 border-t border-white/5 pt-8 text-center text-gray-500 text-sm">
                 <p>&copy; 2025 Brendan O'Keefe. All Rights Reserved.</p>
             </div>
@@ -321,15 +409,18 @@
 
     <!-- Chat Widget -->
     <div id="chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-        <div id="chat-window" class="hidden mb-4 w-80 md:w-96 h-[450px] max-h-[70vh] bg-secondary border border-white/10 rounded-lg shadow-2xl flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right transform scale-95 opacity-0">
+        <div id="chat-window"
+            class="hidden mb-4 w-80 md:w-96 h-[450px] max-h-[70vh] bg-secondary border border-white/10 rounded-lg shadow-2xl flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right transform scale-95 opacity-0">
             <div class="bg-primary p-4 border-b border-white/10 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-full overflow-hidden border border-accent">
-                        <img src="https://iam.aichampion.com.au/assets/brendan-okeefe-profile-cap-2026-compressed-BxhSLMkt.png" class="w-full h-full object-cover">
+                        <img src="https://iam.aichampion.com.au/assets/brendan-okeefe-profile-cap-2026-compressed-BxhSLMkt.png"
+                            class="w-full h-full object-cover">
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Ask about Brendan</h3>
-                        <p class="text-xs text-green-400 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online</p>
+                        <p class="text-xs text-green-400 flex items-center gap-1"><span
+                                class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online</p>
                     </div>
                 </div>
                 <button id="close-chat" class="text-muted hover:text-white"><i class="fas fa-times"></i></button>
@@ -337,15 +428,21 @@
             <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-[#2a1f23] no-scrollbar"></div>
             <div class="p-3 bg-primary border-t border-white/10">
                 <form id="chat-form" class="flex items-center gap-2">
-                    <input type="text" id="chat-input" placeholder="Ask a question..." class="flex-1 bg-secondary border border-white/10 text-white text-sm rounded-full px-4 py-2 focus:outline-none focus:border-accent">
-                    <button type="submit" class="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center hover:bg-[#b0784a]"><i class="fas fa-paper-plane text-sm"></i></button>
+                    <input type="text" id="chat-input" placeholder="Ask a question..."
+                        class="flex-1 bg-secondary border border-white/10 text-white text-sm rounded-full px-4 py-2 focus:outline-none focus:border-accent">
+                    <button type="submit"
+                        class="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center hover:bg-[#b0784a]"><i
+                            class="fas fa-paper-plane text-sm"></i></button>
                 </form>
             </div>
         </div>
-        <button id="chat-toggle" class="w-14 h-14 bg-accent text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300"><i class="fas fa-comment-dots text-2xl"></i></button>
+        <button id="chat-toggle"
+            class="w-14 h-14 bg-accent text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300"><i
+                class="fas fa-comment-dots text-2xl"></i></button>
     </div>
 
     <!-- Scripts -->
     <script src="index.tsx" type="module"></script>
 </body>
+
 </html>
